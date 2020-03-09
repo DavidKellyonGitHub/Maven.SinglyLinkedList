@@ -11,7 +11,6 @@ public class SinglyLinkedList<F> {
     int numOfNodes=0;
     Node<F> head;
     Node<F> tail;
-    SinglyLinkedList<F> linkList= new SinglyLinkedList<F>();
 
     public static class Node<F>{
          boolean isHead;
@@ -29,9 +28,12 @@ public class SinglyLinkedList<F> {
          public Node(F value, Node<F> nextOrPreviousNode, boolean isHead){
              if (isHead){
                  this.nextNode = nextOrPreviousNode;
+                 this.isHead = true;
              } else {
                  this.prevNode = nextOrPreviousNode;
+                 this.isTail = true;
              }
+             this.value = value;
          }
          public Node(){
              this.value = null;
@@ -44,43 +46,49 @@ public class SinglyLinkedList<F> {
     public <F>SinglyLinkedList(){
     }
 
-    public SinglyLinkedList<F> add(Object o) {
-        if (numOfNodes == 0) {
+    public void add(Object o) {
+        if (this.numOfNodes == 0) {
             this.head = new Node(o, null, true);
-            numOfNodes++;
+            this.numOfNodes++;
         } else if (numOfNodes ==1 ){
             this.tail = new Node(o, head, false);;
-            numOfNodes++;
+            this.numOfNodes++;
         } else {
             this.tail = new Node(o, tail, null);
-            numOfNodes++;
+            this.numOfNodes++;
         }
-        return linkList;
     }
 
-    public SinglyLinkedList <F> remove(Object o){
-        for(int i = 0; i < numOfNodes; i++){
-            if (head.value == o){
+    public Boolean remove(Object o){
+            if (this.head.value == o){
                 this.head = head.nextNode;
-            } else if (tail.value == o){
+                this.numOfNodes--;
+                return true;
+            } else if (this.tail.value == o){
                 this.tail = tail.prevNode;
-                numOfNodes--;
-            }
+                this.numOfNodes--;
+                return true;
         }
-        Node<F> placeHolder = getHead();
-        for (int i = 0; i < numOfNodes; i++){
+
+        Node<F> placeHolder = this.head;
+        for (int i = 0; i < this.numOfNodes; i++){
             if (placeHolder.value != o){
                 placeHolder = placeHolder.nextNode;
-            } if (placeHolder.value ==o){
+                this.numOfNodes--;
+                return true;
+            } else if (placeHolder.value == o){
                 placeHolder.prevNode.nextNode = placeHolder.nextNode;
+                this.numOfNodes--;
+                return true;
             }
         }
-        return linkList;
+        return false;
     }
 
     public boolean contains(Object o){
         return false;
     }
+
     public int find(Object o){
         return 0;
     }
@@ -111,14 +119,6 @@ public class SinglyLinkedList<F> {
 
     public Node<F> getTail() {
         return tail;
-    }
-
-    public SinglyLinkedList<F> getLinkList() {
-        return linkList;
-    }
-
-    public void setLinkList(SinglyLinkedList<F> linkList) {
-        this.linkList = linkList;
     }
 
     public void setHead(Node<F> head) {
