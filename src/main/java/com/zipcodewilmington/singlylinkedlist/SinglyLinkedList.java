@@ -72,35 +72,48 @@ public class SinglyLinkedList<F> {
 
         Node<F> placeHolder = this.head;
         for (int i = 0; i < this.numOfNodes; i++){
-            if (placeHolder.value != o){
+            if (placeHolder.value != o && placeHolder != this.tail){
                 placeHolder = placeHolder.nextNode;
-                this.numOfNodes--;
-                return true;
             } else if (placeHolder.value == o){
                 placeHolder.prevNode.nextNode = placeHolder.nextNode;
                 this.numOfNodes--;
                 return true;
+            } else if (placeHolder == this.tail && placeHolder.value != o){
+                return false;
             }
         }
         return false;
     }
 
     public boolean contains(Object o){
+        if (this.head.value == o){
+            return true;
+        } else if (this.tail.value == o){
+            return true;
+        }
+
+        Node<F> placeHolder = this.head;
+        for (int i = 0; i < this.numOfNodes; i++){
+            if (placeHolder.value != o){
+                placeHolder = placeHolder.nextNode;
+            } else if (placeHolder.value == o){
+                return true;
+            }
+        }
         return false;
     }
 
     public int find(Object o){
         return 0;
     }
-    public int size(Object o){
-        return 0;
+    public int size(){
+        return this.numOfNodes;
     }
+
     public Object get(Object o){
         return null;
     }
-    public SinglyLinkedList <F> copy(Object o){
-        return null;
-    }
+    public SinglyLinkedList <F> copy(Object o){return null;}
     public SinglyLinkedList <F> sort(Object o){
         return null;
     }
