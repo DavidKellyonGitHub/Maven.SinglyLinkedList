@@ -112,7 +112,7 @@ public class SinglyLinkedListTest {
     }
 
     @Test
-    public void containtsFailureTest(){
+    public void containsFailureTest(){
         SinglyLinkedList<String> testList= new SinglyLinkedList();
         String testHead = "TestHead";
         String testTail = "TestTail";
@@ -122,5 +122,35 @@ public class SinglyLinkedListTest {
         testList.add ("TestTail");
         testList.add ("TestThird");
         Assert.assertFalse(testList.contains(testFourth));
+    }
+
+    @Test
+    public void sizeTestAddOnly() {
+        SinglyLinkedList<String> testList = new SinglyLinkedList();
+        String testHead = "TestHead";
+        String testTail = "TestTail";
+        String testThird = "TestThird";
+        testList.add("TestHead");
+        testList.add("TestTail");
+        testList.add("TestThird");
+        int expected = 3;
+        int actual = testList.size();
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void sizeTestAddRemove(){
+        SinglyLinkedList<String> testList = new SinglyLinkedList<String>();
+        String testHead = "TestHead";
+        String testTail = "TestTail";
+        String testThird = "TestThird";
+        testList.add (testHead);
+        testList.add (testTail);
+        testList.add (testThird);
+        testList.remove(testHead);
+        int expected = 2;
+        int actual = testList.size();
+        Assert.assertEquals(expected,actual);
+
     }
 }
