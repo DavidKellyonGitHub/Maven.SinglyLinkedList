@@ -1,5 +1,6 @@
 package com.zipcodewilmington.singlylinkedlist;
 
+import com.sun.org.apache.xpath.internal.functions.FuncFalse;
 import com.sun.tools.javac.code.Attribute;
 
 import java.util.ArrayList;
@@ -46,15 +47,19 @@ public class SinglyLinkedList<F> {
     public <F>SinglyLinkedList(){
     }
 
-    public void add(Object o) {
+    public void add(F o) {
         if (this.numOfNodes == 0) {
-            this.head = new Node(o, null, true);
+            this.head = new Node<F>(o, null, true);
             this.numOfNodes++;
         } else if (numOfNodes ==1 ){
-            this.tail = new Node(o, head, false);;
+            this.tail = new Node<F>(o, head, false);;
             this.numOfNodes++;
+            this.head.nextNode = this.tail;
         } else {
-            this.tail = new Node(o, tail, null);
+            Node<F> newTail = new Node<F>(o, tail, false);
+            this.tail.nextNode = newTail;
+            newTail.prevNode = this.tail;
+            this.tail = newTail;
             this.numOfNodes++;
         }
     }
