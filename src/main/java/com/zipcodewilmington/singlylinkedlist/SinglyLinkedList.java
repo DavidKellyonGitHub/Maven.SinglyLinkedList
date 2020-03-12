@@ -133,17 +133,48 @@ public class SinglyLinkedList<F> {
         }
         return -1;
     }
+
     public int size(){
         return this.numOfNodes;
     }
 
-    public Object get(Object o){
-        return null;
+    public F get(int index){
+        if (index ==0){
+            return this.head.value;
+        } else if (index == this.tail.index){
+            return this.tail.value;
+        }
+
+        Node<F> placeHolder = this.head;
+        for (int i = 0; i < this.numOfNodes; i++){
+            if (placeHolder.index != index){
+                placeHolder = placeHolder.nextNode;
+            } else if (placeHolder.index == index){
+                return placeHolder.value;
+            }
+        }
+
+        return new Node<F>((F) "notFound", null, null).value;
     }
 
-    public SinglyLinkedList <F> copy(F o){return null;}
+    public SinglyLinkedList <F> copy() {
+        SinglyLinkedList<F> newList = new SinglyLinkedList<F>();
+        newList.head = this.head;
+        Node<F> placeHolder = this.head;
+        for (int i = 0; i < this.numOfNodes; i++){
+            if (placeHolder != this.tail){
+                newList.add(placeHolder.value);
+                placeHolder = placeHolder.nextNode;
+            } else if (placeHolder == this.tail){
+                newList.tail = this.tail;
+            }
+        }
+        return newList;
+    }
+
     public SinglyLinkedList <F> sort(F o){
-        return null;
+        SinglyLinkedList<F> sorted = new SinglyLinkedList<F>();
+        return sorted;
     }
 
     public int getNumOfNodes() {

@@ -3,6 +3,8 @@ package com.zipcodewilmington.singlylinkedlist;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+
 /**
  * Created by leon on 1/10/18.
  */
@@ -225,4 +227,65 @@ public class SinglyLinkedListTest {
         int actual = testList.find(testTail);
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void getTestHead() {
+        SinglyLinkedList<String> testList = new SinglyLinkedList<String>();
+        String testHead = "TestHead";
+        String testMiddle = "TestMiddle";
+        String testTail = "TestTail";
+        testList.add(testHead);
+        testList.add(testMiddle);
+        testList.add(testTail);
+        String expected = testHead;
+        String actual = testList.get(0);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getTestMiddle() {
+        SinglyLinkedList<String> testList = new SinglyLinkedList<String>();
+        String testHead = "TestHead";
+        String testMiddle = "TestMiddle";
+        String testTail = "TestTail";
+        testList.add(testHead);
+        testList.add(testMiddle);
+        testList.add(testTail);
+        String expected = testMiddle;
+        String actual = testList.get(1);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getTestTail() {
+        SinglyLinkedList<String> testList = new SinglyLinkedList<String>();
+        String testHead = "TestHead";
+        String testMiddle = "TestMiddle";
+        String testTail = "TestTail";
+        testList.add(testHead);
+        testList.add(testMiddle);
+        testList.add(testTail);
+        String expected = testTail;
+        String actual = testList.get(2);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void copyTest() {
+        SinglyLinkedList<String> testList = new SinglyLinkedList<String>();
+        String testHead = "TestHead";
+        String testMiddle = "TestMiddle";
+        String testTail = "TestTail";
+        testList.add(testHead);
+        testList.add(testMiddle);
+        testList.add(testTail);
+        Assert.assertTrue(testList.contains(testHead));
+        Assert.assertTrue(testList.contains(testMiddle));
+        Assert.assertTrue(testList.contains(testTail));
+        SinglyLinkedList newList = testList.copy();
+        Assert.assertTrue(newList.contains(testHead));
+        Assert.assertTrue(newList.contains(testMiddle));
+        Assert.assertTrue(newList.contains(testTail));
+    }
+
 }
