@@ -176,11 +176,53 @@ public class SinglyLinkedListTest {
         String testMiddle = "TestMiddle";
         String testTail= "TestTail";
         testList.add(testHead);
-        testList.add(testTail);
+        testList.add(testMiddle);
         testList.add(testTail);
         testList.remove(testTail);
         int expected = 2;
         int actual = testList.size();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void findTestHead(){
+        SinglyLinkedList<String> testList = new SinglyLinkedList<String>();
+        String testHead = "TestHead";
+        String testMiddle = "TestMiddle";
+        String testTail= "TestTail";
+        testList.add(testHead);
+        testList.add(testMiddle);
+        testList.add(testTail);
+        int expected = 0;
+        int actual = testList.find(testHead);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void findTestMiddle(){
+        SinglyLinkedList<String> testList = new SinglyLinkedList<String>();
+        String testHead = "TestHead";
+        String testMiddle = "TestMiddle";
+        String testTail= "TestTail";
+        testList.add(testHead);
+        testList.add(testMiddle);
+        testList.add(testTail);
+        int expected = 1;
+        int actual = testList.find(testMiddle);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void findTestTail() {
+        SinglyLinkedList<String> testList = new SinglyLinkedList<String>();
+        String testHead = "TestHead";
+        String testMiddle = "TestMiddle";
+        String testTail = "TestTail";
+        testList.add(testHead);
+        testList.add(testMiddle);
+        testList.add(testTail);
+        int expected = 2;
+        int actual = testList.find(testTail);
         Assert.assertEquals(expected, actual);
     }
 }

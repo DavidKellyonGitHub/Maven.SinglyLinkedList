@@ -19,6 +19,7 @@ public class SinglyLinkedList<F> {
          Node<F> prevNode;
          Node<F> nextNode;
          F value;
+         int index;
 
          public Node(F value, Node<F> prevNode, Node<F> nextNode){
              this.prevNode = prevNode;
@@ -30,6 +31,7 @@ public class SinglyLinkedList<F> {
              if (isHead){
                  this.nextNode = nextOrPreviousNode;
                  this.isHead = true;
+                 this.index = 0;
              } else {
                  this.prevNode = nextOrPreviousNode;
                  this.isTail = true;
@@ -49,22 +51,28 @@ public class SinglyLinkedList<F> {
 
     public void add(F o) {
         if (this.numOfNodes == 0) {
-            this.head = new Node<F>(o, null, true);
+            Node<F> newNode = new Node<F>(o, null, true);
+            newNode.index = 0;
+            this.head = newNode;
             this.numOfNodes++;
         } else if (numOfNodes ==1 ){
-            this.tail = new Node<F>(o, head, false);;
-            this.numOfNodes++;
+            Node<F> newTail = new Node<F>(o, head, false);
+            this.tail = newTail;
             this.head.nextNode = this.tail;
+            newTail.index = 1;
+            this.numOfNodes++;
+
         } else {
             Node<F> newTail = new Node<F>(o, tail, false);
             this.tail.nextNode = newTail;
             newTail.prevNode = this.tail;
+            newTail.index = newTail.prevNode.index + 1;
             this.tail = newTail;
             this.numOfNodes++;
         }
     }
 
-    public Boolean remove(Object o){
+    public Boolean remove(F o){
             if (this.head.value == o){
                 this.head = head.nextNode;
                 this.numOfNodes--;
@@ -90,7 +98,7 @@ public class SinglyLinkedList<F> {
         return false;
     }
 
-    public boolean contains(Object o){
+    public boolean contains(F o){
         if (this.head.value == o){
             return true;
         } else if (this.tail.value == o){
@@ -108,8 +116,22 @@ public class SinglyLinkedList<F> {
         return false;
     }
 
-    public int find(Object o){
-        return 0;
+    public int find(F o){
+        if (this.head.value == o){
+            return this.head.index;
+        } else if (this.tail.value == o){
+            return this.tail.index;
+        }
+
+        Node<F> placeHolder = this.head;
+        for (int i = 0; i < this.numOfNodes; i++){
+            if (placeHolder.value != o){
+                placeHolder = placeHolder.nextNode;
+            } else if (placeHolder.value == o){
+                return placeHolder.index;
+            }
+        }
+        return -1;
     }
     public int size(){
         return this.numOfNodes;
@@ -118,8 +140,9 @@ public class SinglyLinkedList<F> {
     public Object get(Object o){
         return null;
     }
-    public SinglyLinkedList <F> copy(Object o){return null;}
-    public SinglyLinkedList <F> sort(Object o){
+
+    public SinglyLinkedList <F> copy(F o){return null;}
+    public SinglyLinkedList <F> sort(F o){
         return null;
     }
 
