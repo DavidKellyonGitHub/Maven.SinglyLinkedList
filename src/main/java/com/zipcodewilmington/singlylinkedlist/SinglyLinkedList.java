@@ -4,11 +4,12 @@ import com.sun.org.apache.xpath.internal.functions.FuncFalse;
 import com.sun.tools.javac.code.Attribute;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Created by leon on 1/10/18.
  */
-public class SinglyLinkedList<F> {
+public class SinglyLinkedList<F extends Comparable<F>> {
     int numOfNodes=0;
     Node<F> head;
     Node<F> tail;
@@ -172,8 +173,23 @@ public class SinglyLinkedList<F> {
         return newList;
     }
 
-    public SinglyLinkedList <F> sort(F o){
+    public SinglyLinkedList <F> sort() {
         SinglyLinkedList<F> sorted = new SinglyLinkedList<F>();
+        Node<F> placeHolder = this.head;
+        boolean isSorted = false;
+        while (!isSorted) {
+            for (int i = 0; i < this.numOfNodes; i++) {
+                if (placeHolder.value.compareTo(placeHolder.nextNode.value) > 0){
+                    placeHolder.nextNode.index--;
+                    placeHolder.nextNode.prevNode = placeHolder;
+                    placeHolder = placeHolder.nextNode;
+                    placeHolder.index++;
+
+            } else if (placeHolder.value.compareTo(placeHolder.nextNode.value) < 0){
+
+                }
+        }
+    }
         return sorted;
     }
 
