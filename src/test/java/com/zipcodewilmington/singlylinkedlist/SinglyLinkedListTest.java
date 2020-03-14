@@ -288,4 +288,34 @@ public class SinglyLinkedListTest {
         Assert.assertTrue(newList.contains(testTail));
     }
 
+    @Test
+    public void sortTestString(){
+        SinglyLinkedList<String> testList = new SinglyLinkedList<String>();
+        String testHead = "c";
+        String testMiddle = "a";
+        String testTail = "b";
+        testList.add(testHead);
+        testList.add(testMiddle);
+        testList.add(testTail);
+        testList.sort();
+        Assert.assertEquals("a", testList.get(0));
+        Assert.assertEquals("b", testList.get(1));
+        Assert.assertEquals("c", testList.get(2));
+    }
+
+    @Test
+    public void SortTestInt(){
+        SinglyLinkedList<Integer> testList = new SinglyLinkedList<Integer>();
+        Integer testHead = 3;
+        Integer testMiddle = 1;
+        Integer testTail = 2;
+        testList.add(testHead);
+        testList.add(testMiddle);
+        testList.add(testTail);
+        testList.sort();
+        Assert.assertTrue(1== testList.get(0));
+        Assert.assertTrue(2 == testList.get(1));
+        Assert.assertTrue(3== testList.get(2));
+    }
+
 }

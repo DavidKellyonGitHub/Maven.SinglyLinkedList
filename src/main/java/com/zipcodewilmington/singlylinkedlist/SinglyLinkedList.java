@@ -9,6 +9,7 @@ import java.util.Comparator;
 /**
  * Created by leon on 1/10/18.
  */
+
 public class SinglyLinkedList<F extends Comparable<F>> {
     int numOfNodes=0;
     Node<F> head;
@@ -139,6 +140,24 @@ public class SinglyLinkedList<F extends Comparable<F>> {
         return this.numOfNodes;
     }
 
+    public Node<F> getNodeByIndex(int index){
+        if (index ==0){
+            return this.head;
+        } else if (index == this.tail.index){
+            return this.tail;
+        }
+
+        Node<F> placeHolder = this.head;
+        for (int i = 0; i < this.numOfNodes; i++){
+            if (placeHolder.index != index){
+                placeHolder = placeHolder.nextNode;
+            } else if (placeHolder.index == index){
+                return placeHolder;
+            }
+        }
+        return new Node<F>((F) "notFound", null, null);
+    }
+
     public F get(int index){
         if (index ==0){
             return this.head.value;
@@ -174,23 +193,26 @@ public class SinglyLinkedList<F extends Comparable<F>> {
     }
 
     public SinglyLinkedList <F> sort() {
-        SinglyLinkedList<F> sorted = new SinglyLinkedList<F>();
-        Node<F> placeHolder = this.head;
+        int unsortedIndex = this.numOfNodes;
         boolean isSorted = false;
-        while (!isSorted) {
-            for (int i = 0; i < this.numOfNodes; i++) {
-                if (placeHolder.value.compareTo(placeHolder.nextNode.value) > 0){
-                    placeHolder.nextNode.index--;
-                    placeHolder.nextNode.prevNode = placeHolder;
-                    placeHolder = placeHolder.nextNode;
-                    placeHolder.index++;
-
-            } else if (placeHolder.value.compareTo(placeHolder.nextNode.value) < 0){
-
+        while (!isSorted){
+            isSorted = true;
+            for (int i = 0; i < unsortedIndex; i++) {
+                if (this.get(i).compareTo(this.get(i+1)) > 0){
+                    swap(this.getNodeByIndex(i), this.getNodeByIndex(i+1));
+                    isSorted = false;
                 }
+                unsortedIndex--;
         }
     }
-        return sorted;
+        return this;
+    }
+
+    public void swap(Node<F> node, Node<F> nodeNext) {
+        Node<F> placeHolder = new Node<F>();
+        placeHolder.value = nodeNext.value;
+        nodeNext.value = node.value;
+        node.value = placeHolder.value;
     }
 
     public int getNumOfNodes() {
