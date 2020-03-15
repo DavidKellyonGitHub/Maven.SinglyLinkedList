@@ -10,6 +10,8 @@ import java.util.Comparator;
  * Created by leon on 1/10/18.
  */
 
+// ================= this is a dually-linked list
+
 public class SinglyLinkedList<F extends Comparable<F>> {
     int numOfNodes=0;
     Node<F> head;
@@ -213,6 +215,20 @@ public class SinglyLinkedList<F extends Comparable<F>> {
         placeHolder.value = nodeNext.value;
         nodeNext.value = node.value;
         node.value = placeHolder.value;
+    }
+
+    public SinglyLinkedList<F> reverse(){
+        int unsortedIndex = 0;
+        boolean reversed = false;
+        while (!reversed){
+            reversed = true;
+            for (int i = this.tail.index;i > unsortedIndex;i--){
+                swap(this.getNodeByIndex(i-1),this.getNodeByIndex(i));
+                reversed=false;
+            }
+            unsortedIndex++;
+        }
+        return this;
     }
 
     public int getNumOfNodes() {

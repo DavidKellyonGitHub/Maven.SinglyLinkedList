@@ -304,7 +304,7 @@ public class SinglyLinkedListTest {
     }
 
     @Test
-    public void SortTestInt(){
+    public void sortTestInt(){
         SinglyLinkedList<Integer> testList = new SinglyLinkedList<Integer>();
         Integer testHead = 3;
         Integer testMiddle = 1;
@@ -316,6 +316,73 @@ public class SinglyLinkedListTest {
         Assert.assertTrue(1== testList.get(0));
         Assert.assertTrue(2 == testList.get(1));
         Assert.assertTrue(3== testList.get(2));
+    }
+
+    @Test
+    public void sortTestHeadTail(){
+        SinglyLinkedList<Integer> testList = new SinglyLinkedList<Integer>();
+        Integer testHead = 3;
+        Integer testMiddle = 1;
+        Integer testTail = 2;
+        testList.add(testHead);
+        testList.add(testMiddle);
+        testList.add(testTail);
+        testList.sort();
+        Assert.assertTrue(1== testList.head.value);
+        Assert.assertTrue(2 == testList.get(1));
+        Assert.assertTrue(3== testList.tail.value);
+    }
+
+    @Test
+    public void reverseTest3(){
+        SinglyLinkedList<Integer> testList = new SinglyLinkedList<Integer>();
+        Integer testHead = 3;
+        Integer testMiddle = 2;
+        Integer testTail = 1;
+        testList.add(testHead);
+        testList.add(testMiddle);
+        testList.add(testTail);
+        testList.reverse();
+        Assert.assertTrue(1 == testList.get(0));
+        Assert.assertTrue(2 == testList.get(1));
+        Assert.assertTrue(3 == testList.get(2));
+
+    }
+    @Test
+    public void reverseTest10(){
+        SinglyLinkedList<Integer> testList = new SinglyLinkedList<Integer>();
+        Integer testHead = 10;
+        Integer testNine = 9;
+        Integer testEight = 8;
+        Integer testSeven = 7;
+        Integer testSix = 6;
+        Integer testFive = 5;
+        Integer testFour = 4;
+        Integer testThree = 3;
+        Integer testTwo = 2;
+        Integer testTail = 1;
+        testList.add(testHead);
+        testList.add(testNine);
+        testList.add(testEight);
+        testList.add(testSeven);
+        testList.add(testSix);
+        testList.add(testFive);
+        testList.add(testFour);
+        testList.add(testThree);
+        testList.add(testTwo);
+        testList.add(testTail);
+        testList.reverse();
+        Assert.assertTrue(1 == testList.get(0));
+        Assert.assertTrue(2 == testList.get(1));
+        Assert.assertTrue(3 == testList.get(2));
+        Assert.assertTrue(4 == testList.get(3));
+        Assert.assertTrue(5 == testList.get(4));
+        Assert.assertTrue(6 == testList.get(5));
+        Assert.assertTrue(7 == testList.get(6));
+        Assert.assertTrue(8 == testList.get(7));
+        Assert.assertTrue(9 == testList.get(8));
+        Assert.assertTrue( 10 == testList.get(9));
+
     }
 
 }
